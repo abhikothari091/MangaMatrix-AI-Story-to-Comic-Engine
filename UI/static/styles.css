@@ -1,0 +1,203 @@
+body {
+    font-family: 'Rubik', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+  
+  .card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    border: none;
+  }
+  
+  textarea.form-control {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+    border: 1px solid #444;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+  }
+  
+  textarea::placeholder {
+    color: #aaa;
+  }
+  
+  .btn {
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .panel-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    margin: 0 auto;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  
+  
+  .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+  }
+  
+  .panel-wrapper:hover .nav-arrow {
+    opacity: 1;
+  }
+  
+  .nav-left {
+    left: 10px;
+  }
+  
+  .nav-right {
+    right: 10px;
+  }
+
+  
+  body.light-mode {
+    background-color: #f4f4f8;
+    color: #222;
+  }
+  
+  body.light-mode .card {
+    background-color: #ffffff;
+  }
+  
+  body.light-mode .form-control {
+    background-color: #ffffff;
+    color: #111;
+    border: 1px solid #ccc;
+  }
+  
+  body.light-mode .form-check-label {
+    color: #222;
+  }
+  .panel-scroll {
+    height: 80vh;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    text-align: center;
+  }
+  body.light-mode .panel-scroll {
+    background-color: #ffffff;
+  }
+  
+  .panel-scroll img {
+    width: 100%;
+    height: auto;
+    max-width: none;  /* 🔥 ensures it fills the scroll container */
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  
+  body.light-mode .nav-arrow {
+    background-color: rgba(0, 0, 0, 0.1);  /* softer dark arrow background */
+    color: #000;                          /* dark text for arrows */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* subtle shadow for contrast */
+  }
+
+  body.light-mode h1 {
+    color: #111;  /* or #222 for softer black */
+  }
+  
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .card, .form-control, .panel-scroll {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body.light-mode #generateBtn {
+    background-color: #222;
+    color: #fff;
+    border: none;
+  }
+  
+  body.light-mode #generateBtn:hover {
+    background-color: #000;
+    transform: scale(1.05);
+  }
+
+  .panel-wrapper {
+    position: relative; /* ⬅️ THIS is crucial */
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .clickable-panel {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .click-zone {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    z-index: 5;
+    cursor: pointer;
+  }
+  
+  /* Optional: for debug/testing */
+  .click-zone-left {
+    left: 0;
+  }
+  
+  .click-zone-right {
+    right: 0;
+  }
+
+  .banner-header {
+    width: 100%;
+    background-color: transparent;  /* or #1e1e1e for dark header */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .banner-logo {
+    width: 100%;
+    max-width: 100%;  /* full stretch */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  .banner-logo {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  
