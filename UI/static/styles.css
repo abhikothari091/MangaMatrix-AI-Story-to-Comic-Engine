@@ -83,12 +83,12 @@ body {
 
   
   body.light-mode {
-    background-color: #f4f4f8;
+    background-color: #f3f1ec; /* ☁️ softer paper tone */
     color: #222;
   }
   
   body.light-mode .card {
-    background-color: #ffffff;
+    background-color: #fbfbfb; /* 🧾 subtle soft gray */
   }
   
   body.light-mode .form-control {
@@ -109,7 +109,7 @@ body {
     text-align: center;
   }
   body.light-mode .panel-scroll {
-    background-color: #ffffff;
+    background-color: #f3f3f3;
   }
   
   .panel-scroll img {
@@ -137,13 +137,15 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  body.light-mode #generateBtn {
+  body.light-mode #generateBtn,
+  body.light-mode #downloadBtn {
     background-color: #222;
     color: #fff;
     border: none;
   }
   
-  body.light-mode #generateBtn:hover {
+  body.light-mode #generateBtn:hover,
+  body.light-mode #downloadBtn:hover {
     background-color: #000;
     transform: scale(1.05);
   }
@@ -220,9 +222,10 @@ body {
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
   }
   
+  body.light-mode .form-control,
   body.light-mode .prompt-box {
-    background-color: #ffffff;
-    color: #111;                    /* Dark text for light mode */
+    background-color: #f9f9f9;
+    color: #111;
     border: 1px solid #ccc;
   }
   
@@ -238,3 +241,20 @@ body {
   body.light-mode .light-mode-color {
     color: #222; /* Dark text for light background */
   }
+
+/* Light mode */
+body.light-mode #pdfCanvas {
+  background-color: #f3f1ec;  /* 👈 This gives a warm paper-like tone */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);  /* subtle lift */
+  border-radius: 8px;
+}
+
+/* Dark mode (default body) */
+#pdfCanvas {
+  background-color: black;
+}
+
+#pdfCanvas {
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}

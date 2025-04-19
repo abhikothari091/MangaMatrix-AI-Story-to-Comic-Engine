@@ -1,59 +1,71 @@
-const panels = [
-    "/static/images/panels/panel1.png",
-    "/static/images/panels/panel2.png",
-    "/static/images/panels/panel3.png",
-    "/static/images/panels/panel4.png",
-    "/static/images/panels/panel5.png"
-  ];
-  
-  let currentIndex = 0;
-  
-  const scrollContainer = document.getElementById("panelScrollContainer");
-  const panelImage = document.getElementById("panelImage");
-  
-  // Load current panel
-  function updatePanel() {
-    panelImage.style.opacity = 0; // Start fade-out
-  
-    setTimeout(() => {
-      panelImage.src = panels[currentIndex];
-      scrollContainer.scrollTo({ top: 0, behavior: "auto" });
-      panelImage.onload = () => {
-        panelImage.style.opacity = 1; // Fade-in after load
-      };
-    }, 200); // Delay gives a smooth transition feel
+const pdfPath = "/static/generated/manga_story.pdf";
+let pdfDoc = null;
+let currentPage = 1;
+
+const canvas = document.getElementById("pdfCanvas");
+const ctx = canvas.getContext("2d");
+
+// Dynamically create click zones
+const panelWrapper = document.getElementById("panelWrapper");
+
+const leftZone = document.createElement("div");
+leftZone.className = "click-zone click-zone-left";
+panelWrapper.appendChild(leftZone);
+
+const rightZone = document.createElement("div");
+rightZone.className = "click-zone click-zone-right";
+panelWrapper.appendChild(rightZone);
+
+// Now attach event listeners to the created elements
+leftZone.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPage(currentPage);
   }
-  
-  
-  // Setup clickable zones
-  const panelWrapper = document.getElementById("panelWrapper");
-  
-  const leftZone = document.createElement("div");
-  leftZone.className = "click-zone click-zone-left";
-  leftZone.addEventListener("click", () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updatePanel();
-    }
+});
+
+rightZone.addEventListener("click", () => {
+  if (currentPage < pdfDoc.numPages) {
+    currentPage++;
+    renderPage(currentPage);
+  }
+});
+
+// Load and render PDF
+pdfjsLib.getDocument(pdfPath).promise.then((doc) => {
+  pdfDoc = doc;
+  renderPage(currentPage);
+});
+
+function renderPage(pageNum) {
+  pdfDoc.getPage(pageNum).then((page) => {
+    const viewport = page.getViewport({ scale: 1.5 });
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    // 🌑 Fill canvas with current background color (before rendering page)
+    ctx.save();
+    ctx.fillStyle = getComputedStyle(canvas).backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: viewport
+    };
+
+    page.render(renderContext);
   });
-  
-  const rightZone = document.createElement("div");
-  rightZone.className = "click-zone click-zone-right";
-  rightZone.addEventListener("click", () => {
-    if (currentIndex < panels.length - 1) {
-      currentIndex++;
-      updatePanel();
-    }
-  });
-  
-  panelWrapper.appendChild(leftZone);
-  panelWrapper.appendChild(rightZone);
-  
-  // Theme toggle
-  document.getElementById("themeToggle").addEventListener("change", () => {
-    document.body.classList.toggle("light-mode");
-  });
-  
-  // Initial load
-  updatePanel();
-  
+}
+
+document.getElementById("themeToggle").addEventListener("change", () => {
+  document.body.classList.toggle("light-mode");
+  renderPage(currentPage); // 🧠 This redraws the canvas using new theme background
+});
+
+document.getElementById("downloadBtn").addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.href = "/static/generated/manga_story.pdf"; // Adjust path if needed
+  link.download = "manga_story.pdf"; // Desired filename
+  link.click();
+});
