@@ -223,6 +223,7 @@ def extract_title_and_characters(story_text):
 
 
 def save_images_to_pdf(image_data_dict, output_path="manga_story.pdf"):
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     c = canvas.Canvas(output_path, pagesize=A4)
     width, height = A4
     padding = 40
