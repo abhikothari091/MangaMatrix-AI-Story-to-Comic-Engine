@@ -1,16 +1,17 @@
 body {
-    font-family: 'Rubik', sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
-  }
+  background-color: #121212; /* fallback */
+  background-image: url('/static/images/bg-paper-dark.png');
+  background-repeat: repeat;
+  background-size: contain;
+  transition: background-color 0.3s ease, background-image 0.3s ease;
+}
   
   h1 {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
+    font-family: 'Bangers', 'Rajdhani', sans-serif;  /* add Bangers or similar for impact */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
   }
+  
   
   .card {
     background-color: #1e1e1e;
@@ -83,8 +84,8 @@ body {
 
   
   body.light-mode {
-    background-color: #f3f1ec; /* ☁️ softer paper tone */
-    color: #222;
+    background-color: #f3f1ec;
+    background-image: url('/static/images/bg-paper-light.png'); /* Add a light version here if available */
   }
   
   body.light-mode .card {
@@ -257,4 +258,9 @@ body.light-mode #pdfCanvas {
 #pdfCanvas {
   transition: background-color 0.3s ease, opacity 0.3s ease;
   opacity: 1;
+}
+
+.prompt-box:hover, .prompt-box:focus {
+  box-shadow: 0 0 8px rgba(255,255,255,0.2);
+  border-color: #666;
 }
