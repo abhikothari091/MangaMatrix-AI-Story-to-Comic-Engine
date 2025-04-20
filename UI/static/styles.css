@@ -264,3 +264,60 @@ body.light-mode #pdfCanvas {
   box-shadow: 0 0 8px rgba(255,255,255,0.2);
   border-color: #666;
 }
+
+
+/* 🔥 Spinner flare background */
+.manga-flare {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
+  animation: flarePulse 1s ease-in-out infinite;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ⚙️ Spinner style */
+.big-spinner {
+  width: 4rem;
+  height: 4rem;
+  border-width: 0.4rem;
+  z-index: 2;
+  animation: spinGlow 1s linear infinite;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+/* 💥 Glowing spinner animation */
+@keyframes spinGlow {
+  0% { transform: rotate(0deg); box-shadow: 0 0 6px rgba(255,255,255,0.3); }
+  50% { box-shadow: 0 0 18px rgba(255,255,255,0.8); }
+  100% { transform: rotate(360deg); box-shadow: 0 0 6px rgba(255,255,255,0.3); }
+}
+
+/* ✨ Flare pulse effect */
+@keyframes flarePulse {
+  0%, 100% { transform: scale(1) translate(-50%, -50%); opacity: 0.7; }
+  50% { transform: scale(1.6) translate(-50%, -50%); opacity: 0.2; }
+}
+
+/* 💬 SFX styled text */
+.sfx-text {
+  font-family: 'Bangers', cursive;
+  font-size: 1.6rem;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.2);
+  animation: shakeText 1s infinite ease-in-out;
+  z-index: 3;
+  position: relative;
+}
+
+/* 🎉 Shaking text animation */
+@keyframes shakeText {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-1px); }
+}

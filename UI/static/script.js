@@ -97,6 +97,9 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
 });
 
 document.getElementById("generateBtn").addEventListener("click", () => {
+  const loadingDiv = document.getElementById("loadingSpinner");
+  loadingDiv.style.display = "block"; // Show the spinner
+
   const prompt = document.querySelector(".prompt-box").value;
 
   // Temporary message
@@ -123,9 +126,11 @@ document.getElementById("generateBtn").addEventListener("click", () => {
   .then(data => {
     console.log("✅ Generated Story:", data);
     loadNewPDF(data.title);
+    loadingDiv.style.display = "none";
   })
   .catch(err => {
     console.error("❌ Error generating story:", err);
+    loadingDiv.style.display = "none";
   });
 });
 
