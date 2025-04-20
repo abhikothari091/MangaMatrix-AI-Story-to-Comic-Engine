@@ -2,6 +2,7 @@ let pdfPath = null; // Start with no PDF loaded
 let pdfDoc = null;
 let currentPage = 1;
 
+const generateBtn = document.getElementById("generateBtn");
 const canvas = document.getElementById("pdfCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -90,19 +91,25 @@ document.getElementById("themeToggle").addEventListener("change", () => {
 
 
 document.getElementById("downloadBtn").addEventListener("click", () => {
+  if (!pdfPath) {
+    alert("Please generate a manga before downloading.");
+    return;
+  }
+
   const link = document.createElement("a");
-  link.href = "/static/generated/manga_story.pdf"; // Adjust path if needed
-  link.download = "manga_story.pdf"; // Desired filename
+  link.href = pdfPath;
+  link.download = pdfPath.split("/").pop();
   link.click();
 });
 
-document.getElementById("generateBtn").addEventListener("click", () => {
-  const loadingDiv = document.getElementById("loadingSpinner");
-  loadingDiv.style.display = "block"; // Show the spinner
 
+document.getElementById("generateBtn").addEventListener("click", () => {
+  const spinner = document.getElementById("spinnerContainer");
+  spinner.style.display = "block";
+  generateBtn.disabled = true;
   const prompt = document.querySelector(".prompt-box").value;
 
-  // Temporary message
+  // Optional: Update canvas while loading
   const ctx = canvas.getContext("2d");
   canvas.width = 800;
   canvas.height = 600;
@@ -110,48 +117,56 @@ document.getElementById("generateBtn").addEventListener("click", () => {
   ctx.fillStyle = isLight ? "#f3f1ec" : "#121212";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = isLight ? "#222" : "#fff";
-
   ctx.font = "20px 'Rajdhani', sans-serif";
   ctx.textAlign = "center";
   ctx.fillText("⏳ Generating your manga...", canvas.width / 2, canvas.height / 2);
 
   fetch("/generate", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt: prompt })
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log("✅ Generated Story:", data);
-    loadNewPDF(data.title);
-    loadingDiv.style.display = "none";
-  })
-  .catch(err => {
-    console.error("❌ Error generating story:", err);
-    loadingDiv.style.display = "none";
+    .then(response => {
+      if (!response.ok) throw new Error("Generation failed.");
+      return response.json();
+    })
+    .then(data => {
+      pdfPath = data.pdf_path;
+      loadNewPDF(pdfPath);
+    })
+    .catch(err => {
+      console.error("❌ Error generating story:", err);
+      showWelcomeMessage();
+    })
+    .finally(() => {
+      spinner.style.display = "none";   // ✅ Always hide spinner
+      generateBtn.disabled = false;     // 🔓 Re-enable button
+    });
   });
-});
 
 
 
-function loadNewPDF(title) {
-  const safeTitle = title.replace(/\s+/g, "_");
-  pdfPath = `/static/generated/${safeTitle}.pdf`;
 
-  pdfjsLib.getDocument(pdfPath).promise
-  .then((doc) => {
-    pdfDoc = doc;
-    currentPage = 1;
-    renderPage(currentPage);
-  })
-  .catch(err => {
-    console.error("❌ Failed to load PDF:", err);
-    showWelcomeMessage(); // Fallback
-  });
+function loadNewPDF(path) {
+  pdfjsLib.getDocument(path).promise
+    .then((doc) => {
+      pdfDoc = doc;
+      currentPage = 1;
+      renderPage(currentPage);
+    })
+    .catch(err => {
+      console.error("❌ Failed to load PDF:", err);
+      showWelcomeMessage();
+    });
 }
+
+function updateProgressBar(percent) {
+  const bar = document.getElementById("progressBar");
+  bar.style.width = `${percent}%`;
+  bar.innerText = `${percent}%`;
+}
+
+
 
 // Show initial welcome screen on load
 document.addEventListener("DOMContentLoaded", showWelcomeMessage);
-

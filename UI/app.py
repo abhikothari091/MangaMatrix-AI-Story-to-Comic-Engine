@@ -121,7 +121,7 @@ def parse_story_to_panels(story_text):
     return panel_dict, characters
 
 def build_subpanel_prompt(panel_summary, characters):
-    return f"""You are a skilled manga artist. Given a single-sentence panel summary, break it into 3–4 subpanels. Each subpanel should describe a distinct visual moment using camera angle, emotion, posture, or atmosphere. Focus on visual storytelling. Do not include dialogue.
+    return f"""You are a skilled manga storyboard artist. Given a single-sentence manga panel summary, expand it into 3–4 detailed **subpanels**. Each subpanel should describe a distinct visual beat using camera angle, emotion, posture, or background. Focus on visual storytelling. Do not include dialogue or narration.
 
 ---
 
@@ -129,9 +129,9 @@ Example 1:
 
 Scene: A teenager waits alone in the kitchen as the rain pours outside.
 
-Subpanel 1: Wide shot of a quiet kitchen, shadows stretching across the tiled floor.
-Subpanel 2: Medium shot from the side, showing the teen sitting at the table, resting their chin on their hand.
-Subpanel 3: Close-up of raindrops trailing down the window behind them.
+Subpanel 1: Wide shot of a quiet kitchen, shadows stretching across the tiled floor.  
+Subpanel 2: Medium shot from the side, showing the teen sitting at the table, resting their chin on their hand.  
+Subpanel 3: Close-up of raindrops trailing down the window behind them.  
 Subpanel 4: A low angle shows their hand slowly tapping against a cold cup of tea.
 
 ---
@@ -140,28 +140,19 @@ Example 2:
 
 Scene: A child finds a cracked photo frame buried in a dusty drawer.
 
-Subpanel 1: Close-up of the child’s hand brushing away dust from an old drawer.
-Subpanel 2: Overhead shot revealing the cracked frame peeking out beneath scattered trinkets.
-Subpanel 3: A focused shot of the child’s surprised expression as they lift the frame.
+Subpanel 1: Close-up of the child’s hand brushing away dust from an old drawer.  
+Subpanel 2: Overhead shot revealing the cracked frame peeking out beneath scattered trinkets.  
+Subpanel 3: A focused shot of the child’s surprised expression as they lift the frame.  
 Subpanel 4: Dramatic angle from behind the child as light from the window highlights the photo’s worn image.
 
 ---
 
-Example 3:
+Now generate 3–4 subpanels for the following:
 
-Scene: A figure runs through a forest at twilight, clutching a glowing object.
-
-Subpanel 1: Wide landscape shot of trees blurring in motion as the figure dashes between trunks.
-Subpanel 2: Dynamic low-angle shot of their feet splashing through a puddle, the object tucked under their arm.
-Subpanel 3: Side view capturing their tense expression and sharp breath.
-Subpanel 4: Rear perspective as the glow illuminates branches ahead, casting surreal shadows.
-
----
-
-Characters:
-Scene: {panel_summary}
-Subpanel 1: {characters}
+Scene: {panel_summary}  
+Characters: {characters}
 """
+
 
 def elaborate_panel(panel_summary, characters):
     prompt = build_subpanel_prompt(panel_summary, characters)
@@ -319,7 +310,13 @@ def generate():
     save_images_to_pdf(panel_images, output_path=output_path)
     
 
-    return jsonify({"status": "done", "title": story_title})
+    safe_title = story_title.replace(" ", "_")
+    return jsonify({
+    "status": "done",
+    "title": story_title,
+    "pdf_path": f"/static/generated/{safe_title}.pdf"
+})
+
   # Can return nothing if you prefer
 
 
