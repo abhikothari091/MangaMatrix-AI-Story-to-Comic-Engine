@@ -343,20 +343,23 @@ Output a colored panel suitable for a storybook or comic sequence."""
 
 
 def build_cover_page_prompt(story_title, characters, premise):
-    return f"""You are illustrating the cover page for a manga titled '{story_title}'.
+    return f"""You are a professional manga cover artist. Your task is to illustrate the front cover for a manga titled **'{story_title}'**.
 
 Scene Description:
-A vibrant, full-color manga-style cover featuring {', '.join(characters)} in dynamic poses. The main character, Mika, a cheerful fifth grader, holds a glowing deck of magical cards. The background shows a mystical attic filled with dusty artifacts or a dreamy town under a starry sky, reflecting the story's magical theme. The scene is dramatic, with swirling sparkles and soft light effects to emphasize the cards' magic.
+Create a vibrant, full-color manga-style cover showcasing the main characters: {', '.join(characters)}. Capture their personality and relationships in a single powerful frame.
 
-Characters featured: {', '.join(characters)}
+Premise:
+"{premise}"
 
 Visual Requirements:
-- Draw in full-color, vibrant, detailed manga/anime style with rich colors.
-- Ensure character designs are consistent (Mika has a cheerful expression, school uniform, and short hair).
-- Create a dynamic composition with characters in the foreground and a detailed background.
-- Leave space at the top or center for the title text (to be added later).
-- Reflect the emotional tone of adventure and magic.
-- Draw as if this is the front cover of a printed manga volume."""
+- Full-color, vibrant, highly detailed anime/manga style with dramatic lighting and shading.
+- Character consistency: For example, Mika should have a cheerful expression, short hair, and wear a school uniform.
+- Place characters in dynamic or expressive poses that reflect their roles in the story.
+- Use a dynamic composition: Characters in the foreground, with a rich background that complements the theme (e.g., magical cityscape, school rooftop, train station, etc.).
+- Leave space at the top or center for the manga title to be added later.
+- Emphasize the emotional tone: mix of adventure, magic, and anticipation.
+- This should resemble a professional printed manga volume cover — eye-catching and story-driven.
+"""
 
 
 
