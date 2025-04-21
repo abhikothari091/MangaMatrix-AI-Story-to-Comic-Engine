@@ -487,7 +487,8 @@ def generate():
     panel_images = {}
 
     # Define font settings
-    FONT_PATH = "animeace.ttf"
+    FONT_PATH = os.path.join("static", "fonts", "animeace.ttf")
+    # FONT_PATH = "animeace.ttf"
     FALLBACK_FONT_PATH = "cc-wild-words-roman.ttf"
     FONT_SIZE = 20  # For narration
     TITLE_FONT_SIZE = 35  # For cover page title
