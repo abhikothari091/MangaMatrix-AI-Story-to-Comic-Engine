@@ -14,14 +14,14 @@ MangaMatrix is an AI-powered comic generation pipeline that transforms short sto
 
 ```mermaid
 flowchart TD
-    A[User Prompt] --> B[LLaMA 7B<br>(Story Generator)]
+    A[User Prompt] --> B[LLaMA 7B\n(Story Generator)]
     B --> C[5-Panel Story Output]
-    C --> D[Mistral 7B<br>(Panel Elaborator)]
+    C --> D[Mistral 7B\n(Panel Elaborator)]
     D --> E[3–4 Subpanels per Panel]
-    E --> F[OpenAI DALL·E 3<br>(Image Generator)]
+    E --> F[OpenAI DALL·E 3\n(Image Generator)]
     F --> G[Manga-style Images]
-    G --> H[PDF Compiler<br>(PIL + FPDF)]
-    H --> I[Final Downloadable Manga PDF] 
+    G --> H[PDF Compiler\n(PIL + FPDF)]
+    H --> I[Final Downloadable Manga PDF]
 ```
 
 ### Key Components
