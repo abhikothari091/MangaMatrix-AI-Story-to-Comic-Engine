@@ -32,7 +32,7 @@ flowchart TD
 - `static/generated/`: Location where your final manga-style PDF is saved for download.
 
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -65,7 +65,7 @@ python app.py
 # Open http://localhost:5000 in your browser
 ```
 
-## 🖼️ Sample Output
+## Sample Output
 
 A 5-panel manga PDF with subpanel images generated using your input prompt.  
 Each story includes:
@@ -77,7 +77,7 @@ You can download the generated PDF from the web interface after the story is pro
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Got ideas or improvements?  
 Feel free to fork the repo and submit a pull request – all contributions are welcome!
