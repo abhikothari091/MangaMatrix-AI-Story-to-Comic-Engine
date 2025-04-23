@@ -38,7 +38,7 @@ function renderPage(pageNum) {
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
-    // 🌑 Fill canvas with current background color (before rendering page)
+    // Fill canvas with current background color (before rendering page)
     ctx.save();
     ctx.fillStyle = getComputedStyle(canvas).backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -119,7 +119,7 @@ document.getElementById("generateBtn").addEventListener("click", () => {
   ctx.fillStyle = isLight ? "#222" : "#fff";
   ctx.font = "20px 'Rajdhani', sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText("⏳ Generating your manga...", canvas.width / 2, canvas.height / 2);
+  ctx.fillText("Generating your manga...", canvas.width / 2, canvas.height / 2);
 
   fetch("/generate", {
     method: "POST",
@@ -135,12 +135,12 @@ document.getElementById("generateBtn").addEventListener("click", () => {
       loadNewPDF(pdfPath);
     })
     .catch(err => {
-      console.error("❌ Error generating story:", err);
+      console.error("Error generating story:", err);
       showWelcomeMessage();
     })
     .finally(() => {
-      spinner.style.display = "none";   // ✅ Always hide spinner
-      generateBtn.disabled = false;     // 🔓 Re-enable button
+      spinner.style.display = "none";  
+      generateBtn.disabled = false;    
     });
   });
 
@@ -155,7 +155,7 @@ function loadNewPDF(path) {
       renderPage(currentPage);
     })
     .catch(err => {
-      console.error("❌ Failed to load PDF:", err);
+      console.error("Failed to load PDF:", err);
       showWelcomeMessage();
     });
 }
