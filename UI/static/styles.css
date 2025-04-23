@@ -116,7 +116,7 @@ body {
   .panel-scroll img {
     width: 100%;
     height: auto;
-    max-width: none;  /* 🔥 ensures it fills the scroll container */
+    max-width: none;  
     object-fit: contain;
     border-radius: 10px;
   }
@@ -152,7 +152,7 @@ body {
   }
 
   .panel-wrapper {
-    position: relative; /* ⬅️ THIS is crucial */
+    position: relative; 
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -205,7 +205,7 @@ body {
   
   .prompt-box {
     background-color: #2c2c2c;
-    color: #ffffff;                 /* 👈 This sets the input text to white */
+    color: #ffffff;               
     border: 1px solid #444;
     border-radius: 8px;
     padding: 12px;
@@ -245,7 +245,7 @@ body {
 
 /* Light mode */
 body.light-mode #pdfCanvas {
-  background-color: #f3f1ec;  /* 👈 This gives a warm paper-like tone */
+  background-color: #f3f1ec;  
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);  /* subtle lift */
   border-radius: 8px;
 }
